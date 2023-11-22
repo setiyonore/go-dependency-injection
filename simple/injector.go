@@ -5,7 +5,12 @@ package simple
 
 import "github.com/google/wire"
 
-func InitializedService() (*SimpleService, error) {
+func InitializedService(isError bool) (*SimpleService, error) {
 	wire.Build(NewSimpleRepository, NewSimpleService)
 	return nil, nil
+}
+
+func InitializeDatabaseRepository() *DatabaseRepository {
+	wire.Build(NewDatabaseMongoDb, NewDatabasePostgreSql, NewDatabaseRepository)
+	return nil
 }
